@@ -1,0 +1,31 @@
+parallel-browser-mcp demo: the same 8 pages, one tab at a time, then 4 at a time
+Run 2026-10-21 on darwin arm64, Apple M1, 8 cores, 8 GB RAM, Node v24.13.1, Chrome 155, load average 8.9 at start
+Synthetic data: 8 catalogue pages on a local mock site (127.0.0.1). Each page takes 1500 ms to answer.
+Each task opens its page, then reads the SKU and stock with browser_evaluate, in its own throwaway session.
+
+Chrome start and first page, not counted in either run: 5.06 s
+
+BEFORE: concurrency 1
+  server says: run_parallel: 8 tasks, 8 ok, 0 failed. Took 22.8s (one by one would be about 22.8s), concurrency 1.
+  wall clock 22.86 s, pages ok 8, failed 0, data correct 8 of 8
+
+AFTER: concurrency 4
+  server says: run_parallel: 8 tasks, 8 ok, 0 failed. Took 6.4s (one by one would be about 25.3s), concurrency 4.
+  wall clock 6.38 s, pages ok 8, failed 0, data correct 8 of 8
+
+Seconds per page (each task, from the server report)
+  page  SKU        stock  before  after
+  1     DEMO-001   7      2.7s    3.3s
+  2     DEMO-002   14     2.9s    3.1s
+  3     DEMO-003   21     2.4s    3.1s
+  4     DEMO-004   5      2.4s    3.1s
+  5     DEMO-005   12     4.4s    3.2s
+  6     DEMO-006   19     2.7s    3.2s
+  7     DEMO-007   3      2.7s    3.2s
+  8     DEMO-008   10     2.6s    3.1s
+
+RESULT
+  8 pages: 22.86 s before, 6.38 s after
+  speed-up 3.58x, 16.48 s saved (72% less waiting)
+  Lower bound from the page delay alone: 12.00 s one at a time, 3.00 s with 4 at a time.
+  All pages loaded and every value matched the synthetic catalogue.

@@ -1,0 +1,38 @@
+# Typecheck, unit tests with coverage, and the end to end smoke test.
+# There is no linter in this repo, so CI runs typecheck and tests only.
+# ubuntu-latest ships Google Chrome, which the smoke test drives headless. No secrets are used.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Show Chrome version
+        run: google-chrome --version
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit tests with coverage
+        run: npm run test:coverage
+
+      - name: End to end smoke test
+        run: npm test
