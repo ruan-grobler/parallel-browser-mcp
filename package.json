@@ -1,6 +1,6 @@
 {
   "name": "parallel-browser-mcp",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Playwright MCP with many isolated browser sessions running in parallel",
   "type": "module",
   "main": "dist/index.js",

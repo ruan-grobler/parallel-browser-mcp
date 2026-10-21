@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="943" height="482" viewBox="0 0 943 482" role="img" aria-label="$ npm run demo   (docs/demo-output.txt)">
+<title>$ npm run demo   (docs/demo-output.txt)</title>
+<rect width="943" height="482" rx="10" fill="#0d1117"/>
+<rect x="0.5" y="0.5" width="942" height="481" rx="10" fill="none" stroke="#30363d"/>
+<circle cx="20" cy="16" r="6" fill="#ff5f57"/><circle cx="40" cy="16" r="6" fill="#febc2e"/><circle cx="60" cy="16" r="6" fill="#28c840"/>
+<text x="471.5" y="20" text-anchor="middle" fill="#8b949e" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="12">$&#160;npm&#160;run&#160;demo&#160;&#160;&#160;(docs/demo-output.txt)</text>
+<line x1="0" y1="32" x2="943" y2="32" stroke="#21262d"/>
+<g font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="13" xml:space="preserve" style="white-space:pre">
+<text x="20" y="59" fill="#e6edf3">parallel-browser-mcp&#160;demo:&#160;the&#160;same&#160;8&#160;pages,&#160;one&#160;tab&#160;at&#160;a&#160;time,&#160;then&#160;4&#160;at&#160;a&#160;time</text>
+<text x="20" y="78" fill="#e6edf3">Run&#160;2026-10-21&#160;on&#160;darwin&#160;arm64,&#160;Apple&#160;M1,&#160;8&#160;cores,&#160;8&#160;GB&#160;RAM,&#160;Node&#160;v24.13.1,&#160;Chrome&#160;155,&#160;load&#160;average&#160;8.9&#160;at&#160;start</text>
+<text x="20" y="97" fill="#e6edf3">Synthetic&#160;data:&#160;8&#160;catalogue&#160;pages&#160;on&#160;a&#160;local&#160;mock&#160;site&#160;(127.0.0.1).&#160;Each&#160;page&#160;takes&#160;1500&#160;ms&#160;to&#160;answer.</text>
+<text x="20" y="116" fill="#e6edf3">Each&#160;task&#160;opens&#160;its&#160;page,&#160;then&#160;reads&#160;the&#160;SKU&#160;and&#160;stock&#160;with&#160;browser_evaluate,&#160;in&#160;its&#160;own&#160;throwaway&#160;session.</text>
+<text x="20" y="135" fill="#e6edf3"></text>
+<text x="20" y="154" fill="#e6edf3">Chrome&#160;start&#160;and&#160;first&#160;page,&#160;not&#160;counted&#160;in&#160;either&#160;run:&#160;5.06&#160;s</text>
+<text x="20" y="173" fill="#e6edf3"></text>
+<text x="20" y="192" fill="#ffffff" font-weight="700">BEFORE:&#160;concurrency&#160;1</text>
+<text x="20" y="211" fill="#e6edf3">&#160;&#160;server&#160;says:&#160;run_parallel:&#160;8&#160;tasks,&#160;8&#160;ok,&#160;0&#160;failed.&#160;Took&#160;22.8s&#160;(one&#160;by&#160;one&#160;would&#160;be&#160;about&#160;22.8s),&#160;concurrency&#160;1.</text>
+<text x="20" y="230" fill="#e6edf3">&#160;&#160;wall&#160;clock&#160;22.86&#160;s,&#160;pages&#160;ok&#160;8,&#160;failed&#160;0,&#160;data&#160;correct&#160;8&#160;of&#160;8</text>
+<text x="20" y="249" fill="#e6edf3"></text>
+<text x="20" y="268" fill="#ffffff" font-weight="700">AFTER:&#160;concurrency&#160;4</text>
+<text x="20" y="287" fill="#e6edf3">&#160;&#160;server&#160;says:&#160;run_parallel:&#160;8&#160;tasks,&#160;8&#160;ok,&#160;0&#160;failed.&#160;Took&#160;6.4s&#160;(one&#160;by&#160;one&#160;would&#160;be&#160;about&#160;25.3s),&#160;concurrency&#160;4.</text>
+<text x="20" y="306" fill="#e6edf3">&#160;&#160;wall&#160;clock&#160;6.38&#160;s,&#160;pages&#160;ok&#160;8,&#160;failed&#160;0,&#160;data&#160;correct&#160;8&#160;of&#160;8</text>
+<text x="20" y="325" fill="#e6edf3"></text>
+<text x="20" y="344" fill="#8b949e">&#160;&#160;...</text>
+<text x="20" y="363" fill="#e6edf3"></text>
+<text x="20" y="382" fill="#ffffff" font-weight="700">RESULT</text>
+<text x="20" y="401" fill="#e6edf3">&#160;&#160;8&#160;pages:&#160;22.86&#160;s&#160;before,&#160;6.38&#160;s&#160;after</text>
+<text x="20" y="420" fill="#e6edf3">&#160;&#160;speed-up&#160;3.58x,&#160;16.48&#160;s&#160;saved&#160;(72%&#160;less&#160;waiting)</text>
+<text x="20" y="439" fill="#e6edf3">&#160;&#160;Lower&#160;bound&#160;from&#160;the&#160;page&#160;delay&#160;alone:&#160;12.00&#160;s&#160;one&#160;at&#160;a&#160;time,&#160;3.00&#160;s&#160;with&#160;4&#160;at&#160;a&#160;time.</text>
+<text x="20" y="458" fill="#e6edf3">&#160;&#160;All&#160;pages&#160;loaded&#160;and&#160;every&#160;value&#160;matched&#160;the&#160;synthetic&#160;catalogue.</text>
+</g>
+</svg>

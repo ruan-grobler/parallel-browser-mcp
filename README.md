@@ -1,14 +1,41 @@
 # parallel-browser-mcp
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+**Give an AI agent many isolated browsers at once.** An MCP server that runs Playwright MCP's own browser tools in many separate sessions, in parallel, inside one Chrome.
+
+[![CI](https://github.com/ruan-grobler/parallel-browser-mcp/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/ruan-grobler/parallel-browser-mcp/actions/workflows/ci.yml)
 ![Node 24](https://img.shields.io/badge/node-24-339933?logo=node.js&logoColor=white)
 ![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
 ![MCP stdio server](https://img.shields.io/badge/MCP-stdio%20server-6E56CF)
-<!-- CI badge, uncomment once the repo is on GitHub and the first run is green:
-[![CI](https://github.com/ruan-grobler/parallel-browser-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/ruan-grobler/parallel-browser-mcp/actions/workflows/ci.yml)
--->
+![Tests: 90 unit, 24 end to end](https://img.shields.io/badge/tests-90%20unit%20%2B%2024%20end%20to%20end-brightgreen)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**Give an AI agent many isolated browsers at once.** An MCP server that runs Playwright MCP's own browser tools in many separate sessions, in parallel, inside one Chrome.
+**The result.** The same 8 slow pages took 22.86 s one tab at a time and 6.38 s with 4 isolated sessions in parallel: 3.58x faster, with every value checked against the synthetic data. Measured on an Apple M1 laptop under load. A busier run gave 2.68x ([both runs](#the-result)).
+
+![Terminal output of npm run demo: 8 pages on a local mock site, before with concurrency 1 the wall clock was 22.86 seconds, after with concurrency 4 it was 6.38 seconds, a speed-up of 3.58x, and all pages loaded with every value matching the synthetic catalogue.](docs/images/demo-run.svg)
+
+<sub>From [docs/demo-output.txt](docs/demo-output.txt), the saved output of `npm run demo`. The per page table is cut for space where it says `...`.</sub>
+
+## Quickstart
+
+Needs Node.js 24 and Google Chrome.
+
+```bash
+npm ci
+npm test
+npm run demo
+```
+
+`npm test` builds and runs the end to end smoke test. `npm run demo` prints the before and after report and saves it to `docs/demo-output.txt`.
+
+## Use it in Claude Code
+
+From the repo folder, after `npm ci`:
+
+```bash
+npm run build && claude mcp add parallel-browser -s user -- node "$(pwd)/dist/index.js"
+```
+
+Remove it with `claude mcp remove parallel-browser -s user`. Any MCP client that speaks stdio works the same way.
 
 ## The problem
 
@@ -149,28 +176,6 @@ flowchart LR
 - **A session id on every tool.** Calls on different sessions run at the same time. Calls on one session queue in order.
 - **`run_parallel`.** One tool call runs many tasks at once, server side. Each task is a list of `browser_*` steps.
 - **Log in once, fan out.** A `profile` session keeps its login on disk. `cloneFrom` copies cookies and storage into new workers.
-
-## Quickstart
-
-Needs Node.js 24 and Google Chrome.
-
-```bash
-npm ci
-npm test
-npm run demo
-```
-
-`npm test` builds and runs the end to end smoke test. `npm run demo` prints the before and after report and saves it to `docs/demo-output.txt`.
-
-## Use it in Claude Code
-
-From the repo folder, after `npm ci`:
-
-```bash
-npm run build && claude mcp add parallel-browser -s user -- node "$(pwd)/dist/index.js"
-```
-
-Remove it with `claude mcp remove parallel-browser -s user`. Any MCP client that speaks stdio works the same way.
 
 ## Tools
 
